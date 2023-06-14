@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Shiv s Web</title>
+</head>
+
+<body>
+    <div class="header">
+        <nav>
+            <div><a href="#home" class="logom">Code<span class="logo">Js</span></a></div>
+            <span class="icons" id="icon">=</span>
+            <ul id="ul">
+                <li><a href="#about">About</a></li>
+                <li><a href="#colorm">Colors</a></li>
+                <li><a href="#" onclick="logins()">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="progress" id="pro">
+        <div class="progress-inner">0%</div>
+    </div>
+    <div class="starts" id="home">
+        <h1>Color Pallete</h1>
+        <p>Get you Desired color..</p>
+        <div class="container">
+            <p>
+                Welcome to <span class="typed-text"></span><span class="cursor">&nbsp;</span>
+            </p>
+        </div>
+        <div class="btnc">
+            <a class="btn slide" href="#colorm">Start</a>
+        </div>
+    </div>
+    <div class="login" id="log1">
+        <h2>Login</h2>
+        <span class="crossa" onclick="logins()">x</span>
+        <div class="forms">
+            <label for="name1">User Name</label>
+            <input type="text" id="name1" name="UserName" value="">
+            <label for="pass1"><input type="checkbox" id="checks" value="show" onclick="toggler()"/>Password</label>
+            <input type="password" id="pass1" name="Password" value="">
+            <button class="btn slide" id="form1">Submit</button>
+        </div>
+    </div>
+    <div class="about" id="about">
+        <h1><span>Abouts</span></h1>
+        <ul>
+            <li>It is a simple Color Palette generator to use..</li>
+            <li>Just Click on Colour Button to get  desired colour</li>
+            <li>It is made using Vanilla JavaSccript and CSS</li>
+            <li>I tried to add some more functionality to it </li>
+            <li>Have a look and Tell me how to improve..</li>
+        </ul>
+    </div>
+    <div class="colorMain" id="colorm">
+        <main>
+            <h1 class="headings">Color Pallete</h1>
+            <p>Click on the given button to generate colour pallete..
+            </p>
+            <div class="cen"><button class="btn slide" id="gen" onclick="work()">Colours</button></div>
+            <h4 class="headingss">Generator</h4>
+            <div class="colours">
+                <div class="colour">
+                    <button class="toggle">
+                        <img src="lock-open-solid.svg" class="icon" />
+                    </button>
+                    <input type="text" class="inp" value="#000000" />
+                    <button class="copy">Copy</button>
+                </div>
+                <div class="colour">
+                    <button class="toggle">
+                        <img src="lock-open-solid.svg" class="icon" />
+                    </button>
+                    <input type="text" class="inp" value="#000000" />
+                    <button class="copy">Copy</button>
+                </div>
+                <div class="colour">
+                    <button class="toggle">
+                        <img src="lock-open-solid.svg" class="icon" />
+                    </button>
+                    <input type="text" class="inp" value="#000000" />
+                    <button class="copy">Copy</button>
+                </div>
+                <div class="colour">
+                    <button class="toggle">
+                        <img src="lock-open-solid.svg" class="icon" />
+                    </button>
+                    <input type="text" class="inp" value="#000000" />
+                    <button class="copy">Copy</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="foot">copyright to &#169; am_shiv 2023</footer>
+    <script src="main.js"></script>
+
+    <script>
+        const typedTextSpan = document.querySelector(".typed-text");
+        const cursorSpan = document.querySelector(".cursor");
+
+        const textArray = ["The ", "Color Palatte WebApp", "Lets Start ", "Now!!"];
+        const typingDelay = 200;
+        const erasingDelay = 100;
+        const newTextDelay = 2000; // Delay between current and next text
+        let textArrayIndex = 0;
+        let charIndex = 0;
+
+        function type() {
+            if (charIndex < textArray[textArrayIndex].length) {
+                if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+                typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingDelay);
+            }
+            else {
+                cursorSpan.classList.remove("typing");
+                setTimeout(erase, newTextDelay);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+                typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, erasingDelay);
+            }
+            else {
+                cursorSpan.classList.remove("typing");
+                textArrayIndex++;
+                if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+                setTimeout(type, typingDelay + 1100);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () { // On DOM Load initiate the effect
+            if (textArray.length) setTimeout(type, newTextDelay + 250);
+        });
+
+
+        let l=0;
+        const logins=()=>{
+            //console.log('working');
+            const log=document.getElementById('log1');
+            //console.log(log);
+            if(l%2==0){
+                log.classList.add('show-login');
+            }
+            else{
+                log.classList.remove('show-login');
+            }
+            l=(l+1)%2;
+        }
+
+        
+        let name=document.getElementById('name1');
+        let pass=document.getElementById('pass1');
+        const submitForm=()=>{
+            console.log(name.value);
+            console.log(pass.value);
+            alert("form submitted succesfully");
+            name.value="";
+            pass.value="";
+            logins();
+        }
+
+        const forms=document.getElementById('form1');
+        let checker=document.getElementById('checks');
+        checker.style.backgroundColor='#484de0';
+        const toggler=()=>{
+            if(pass.type=="password"){
+                pass.type="text";
+                checker.style.backgroundColor='#fff';
+            }
+            else{
+                pass.type="password";
+                checker.style.backgroundColor='#484de0';
+
+            }
+
+        }
+        forms.addEventListener('click',submitForm);
+    </script>
+</body>
+
+</html
